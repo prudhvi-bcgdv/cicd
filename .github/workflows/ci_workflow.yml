@@ -84,5 +84,5 @@ jobs:
         run: |
           gcloud config set project ctd-122381-3-sandbox
           docker-compose up -d
-          docker tag dcp-core-service-image-name us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-pru
-          docker push us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-pru
+          docker tag dcp-core-service-image-name us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-prudhvi
+          docker push us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-prudhvi
