@@ -91,8 +91,8 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          gcloud auth configure-docker us-east1-docker.pkg.dev
-          docker-compose up -d
+          gcloud auth configure-docker ${GCP_REGION}-docker.pkg.dev
+          docker-compose up --build
           docker tag dcp-core-service-image-name ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}
           docker push ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}
 
