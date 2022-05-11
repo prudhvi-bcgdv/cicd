@@ -119,6 +119,6 @@ jobs:
           --region $GCP_REGION \
           --allow-unauthenticated \
           --max-instances 1 \
-          --command "npm" \
+          --command "npm start" \
           --port ${PORT} \
           --image ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:${TAG_NAME}
