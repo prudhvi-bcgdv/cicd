@@ -1,0 +1,257 @@
+openapi: 3.0.0
+
+info:
+  title: API overview
+  version: 2.0.0
+
+# servers:
+#     - url: http://localhost:3000/
+#       description: 'Local server'
+
+tags:
+- name: health-check
+  description: A simple health-check endpoint
+- name: api
+  description: the api responsible for connecting with clients
+
+paths:
+  /health-check:
+    get:
+      tags:
+      - health-check
+      summary: A health check API endpoint that returns the health of the service
+      responses:
+        '200':
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+        '500':
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: error message
+
+  /api/rates:
+    post:
+      tags:
+      - api
+      summary: get rates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatesRequestBody'
+              required:
+                  - originZip
+                  - destinationZip
+                  - parcel              
+      responses:
+        '200':
+          description: Api get rates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/RatesResponse'
+        '500':
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: error message
+    
+  /api/predictableDeliveryDates:
+    post:
+      tags:
+      - api
+      summary: get predicted delivery dates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictableDeliveryDatesRequest'
+              required:
+                  - originZip
+                  - destinationZip
+                  - parcel              
+      responses:
+        '200':
+          description: get predicted delivery dates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictableDeliveryDatesResponse'
+        '500':
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: error message
+
+components:
+  schemas:
+    PredictableDeliveryDatesResponse:
+      type: array
+      items:
+        oneOf:
+          - type: array
+            items:
+              type: object
+              properties:
+                sku:
+                  type: string
+                  example: WL2WDPG080
+                distribution_center:
+                  type: string
+                  example: KYSPL
+                carrier:
+                  type: string
+                  example: FedEx
+                service:
+                  type: string
+                  example: FEDEX GROUND
+                origin_zip:
+                  type: string
+                  example: 40165
+                destination_zip:
+                  type: string
+                  example: 38103
+                estimated_delivery_days:
+                  type: number
+                  example: 2
+          - type: array
+            items:
+              $ref:  '#/components/schemas/RatesResponse'            
+        
+    PredictableDeliveryDatesRequest:
+      type: object
+      properties:
+        sku:
+          type: string
+          example: WL2WDPG080
+        destinationZip:
+          type: string
+          example: 40175
+    RatesResponse:     
+      type: object
+      properties:
+        object_created:
+          type: string
+          example: 2022-05-03T19:28:03.816Z
+        object_id:
+          type: string
+          example: 'uuid'
+        object_owner:
+          type: string
+          example: fake.user@domain.com
+        shipment:
+          type: string
+          example: 'uuid'
+        attributes:
+          type: array
+          items:
+            type: string
+            example: [CHEAPEST, FASTEST]
+        amount:
+          type: string
+          example: 7.22
+        currency:
+          type: string
+          example: USD
+        amount_local:
+          type: string
+          example: 7.22
+        currency_local:
+          type: string
+          example: USD
+        provider:
+          type: string
+          example: USPS        
+        provider_image_75:
+          type: string
+          example: url.domain.com/img.png
+        provider_image_200:
+          type: string
+          example: url.domain.com/img.png
+        servicelevel:
+          type: object
+          properties:            
+            name:
+              type: string
+              example: Parcel Select
+            token:
+              type: string
+              example: token_example
+            terms:
+              type: string
+            extended_token:
+              type: string
+              example: token_example
+        estimated_days:
+          type: number
+          example: 7
+        arrives_by:
+          type: string
+          example: 10:30:00
+        duration_terms:
+          type: string
+          example: Delivery in 2 to 8 days.
+        carrier_account:
+          type: string
+          example: 'uuid'
+        test:
+          type: boolean
+          example: false
+        zone:
+          type: string
+          example: 01
+      
+    RatesRequestBody:
+      type: object
+      required:
+          - originZip
+          - destinationZip
+          - parcel
+      properties:
+        originZip:
+          type: string
+          example: 40165
+        destinationZip:
+          type: string
+          example: 40175
+        parcel:
+          type: object
+          properties:
+            height:
+              type: number
+              example: 10
+            length:
+              type: number
+              example: 10
+            weight:
+              type: number
+              example: 1
+            width:
+              type: number
+              example: 15

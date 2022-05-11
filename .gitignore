@@ -1,0 +1,4 @@
+build
+node_modules
+environment/env.dev.yml
+environment/env.prod.yml

@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+    dcp-core-services-api:
+        build:
+            dockerfile: ./docker/Dockerfile
+            context: .
+        container_name: dcp-core-services-api
+        image: dcp-core-service-image-name
+        entrypoint: sh ./docker/init.sh
+        volumes:
+            - ./:/usr/src/
+        ports:
+            - "3000:3000"
