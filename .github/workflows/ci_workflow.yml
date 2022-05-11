@@ -28,6 +28,7 @@ env:
     IMAGE_NAME: dcp-core-services-image-poc
     TAG_NAME: latest
     SERVICE_NAME: dcp-core-services-image-poc
+    PORT: 3000
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -119,4 +120,5 @@ jobs:
           --allow-unauthenticated \
           --max-instances 1 \
           --command "npm" \
+          --port ${PORT}
           --image ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:${TAG_NAME}
