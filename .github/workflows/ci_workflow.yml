@@ -100,8 +100,6 @@ jobs:
     steps:
 
       - name: Deploy to Cloud Run
-        id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0
         run: |
           gcloud run deploy $SERVICE_NAME \
           --platform managed \
