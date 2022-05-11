@@ -75,10 +75,6 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Build Docker Image
-        run: |
-          docker-compose up -d
-
-      - name: Build Docker Image
         with:
           credentials: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
