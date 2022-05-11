@@ -22,7 +22,7 @@ on:
   #workflow_dispatch:
 
 env:
-    REGION: us-east1
+    GCP_REGION: us-east1
     PROJECT_ID: ctd-122381-3-sandbox
     REPO_NAME: dcp-core-services-ref
     IMAGE_NAME: dcp-core-services-image-poc
