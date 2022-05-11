@@ -120,5 +120,5 @@ jobs:
           --allow-unauthenticated \
           --max-instances 1 \
           --command "npm" \
-          --port ${PORT}
+          --port ${PORT} \
           --image ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:${TAG_NAME}
