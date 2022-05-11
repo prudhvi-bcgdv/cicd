@@ -74,6 +74,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+
       - name: Build Docker Image
         with:
           credentials: ${{ secrets.GCP_SA_KEY }}
