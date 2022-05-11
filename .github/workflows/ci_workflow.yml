@@ -21,6 +21,14 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   #workflow_dispatch:
 
+env:
+    REGION: us-east1
+    PROJECT_ID: ctd-122381-3-sandbox
+    REPO_NAME: dcp-core-services-ref
+    IMAGE_NAME: dcp-core-services-image-poc
+    TAG_NAME: latest
+    SERVICE_NAME: dcp-core-services-image-poc
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -84,5 +92,21 @@ jobs:
         run: |
           gcloud auth configure-docker us-east1-docker.pkg.dev
           docker-compose up -d
-          docker tag dcp-core-service-image-name us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-pru
-          docker push us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-pru
+          docker tag dcp-core-service-image-name ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}
+          docker push ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}
+
+  deploy_to_cloud_run:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0
+        run: |
+          gcloud run deploy $SERVICE_NAME \
+          --platform managed \
+          --region $GCP_REGION \
+          --allow-unauthenticated \
+          --max-instances 1 \
+          --command "npm" \
+          --image ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:${TAG_NAME}
