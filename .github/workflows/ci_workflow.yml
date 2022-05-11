@@ -82,7 +82,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          gcloud config set project ctd-122381-3-sandbox
+          gcloud auth configure-docker us-east1-docker.pkg.dev
           docker-compose up -d
-          docker tag dcp-core-service-image-name us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-prudhvi
-          docker push us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-prudhvi
+          docker tag dcp-core-service-image-name us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-pru
+          docker push us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-pru
