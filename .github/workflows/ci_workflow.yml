@@ -75,7 +75,7 @@ jobs:
             npm install --only=dev
             npm run lint
 
-  build-docker:
+  build_docker:
     runs-on: ubuntu-latest
     needs: lint_checkup
 
@@ -97,6 +97,7 @@ jobs:
 
   deploy_to_cloud_run:
     runs-on: ubuntu-latest
+    needs: build_docker
     steps:
 
       - name: Deploy to Cloud Run
