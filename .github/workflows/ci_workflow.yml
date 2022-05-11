@@ -74,12 +74,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
 
       - name: Build Docker Image
         with:
           credentials: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
         run: |
+          gcloud config set project ctd-122381-3-sandbox
           docker-compose up -d
           docker tag dcp-core-service-image-name us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-pru
           docker push us-east1-docker.pkg.dev/ctd-122381-3-sandbox/dcp-core-services-ref/dcp-core-services-image-pru
