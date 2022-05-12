@@ -149,4 +149,4 @@ jobs:
           --command "npm" \
           --args="start" \ 
           --port ${PORT} \
-          --image ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:${TAG_NAME}
+          --image ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}
