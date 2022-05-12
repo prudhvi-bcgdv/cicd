@@ -24,7 +24,7 @@ on:
 env:
     GCP_REGION: us-central1
     PROJECT_ID: ctd-122381-3-sandbox
-    REPO_NAME: dcp-core-services-ref
+    REPO_NAME: dcp-core-services-ref-poc
     IMAGE_NAME: dcp-core-services-image-poc
     TAG_NAME: latest
     SERVICE_NAME: dcp-core-services-image-poc
@@ -106,7 +106,6 @@ jobs:
 
   build_docker:
     runs-on: ubuntu-latest
-    needs: e2e_test
 
     steps:
       - uses: actions/checkout@v3
