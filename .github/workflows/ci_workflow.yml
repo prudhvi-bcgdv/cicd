@@ -148,5 +148,5 @@ jobs:
           --max-instances 1 \
           --command "npm" \
           --args="start" \ 
-          --port ${PORT} \
-          --image ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}
+          --port $PORT \
+          --image $GCP_REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$IMAGE_NAME:$TAG_NAME
