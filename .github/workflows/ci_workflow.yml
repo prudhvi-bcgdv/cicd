@@ -142,7 +142,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy $SERVICE_NAME \
-          --image $GCP_REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dcp-core-services-image:$TAG_NAME \
+          --image $GCP_REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$IMAGE_NAME:$TAG_NAME \
           --allow-unauthenticated \
           --region $GCP_REGION \
           --port=$PORT \
