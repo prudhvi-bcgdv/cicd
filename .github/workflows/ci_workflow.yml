@@ -106,7 +106,7 @@ jobs:
 
   build_docker:
     runs-on: ubuntu-latest
-    needs: lint_checkup
+    needs: e2e_test
 
     steps:
       - uses: actions/checkout@v3
@@ -148,6 +148,6 @@ jobs:
           --allow-unauthenticated \
           --max-instances 1 \
           --command "npm" \
-          --args "start" \ 
+          --args="start" \ 
           --port ${PORT} \
           --image ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:${TAG_NAME}
