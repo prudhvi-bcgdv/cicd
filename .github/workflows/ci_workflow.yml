@@ -143,7 +143,7 @@ jobs:
         run: |
           gcloud run deploy $SERVICE_NAME \
           --platform managed \
-          --project ${PROJECT_ID} \
+          --project $PROJECT_ID \
           --region $GCP_REGION \
           --allow-unauthenticated \
           --max-instances 1 \
