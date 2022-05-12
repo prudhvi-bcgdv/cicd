@@ -22,9 +22,9 @@ on:
   #workflow_dispatch:
 
 env:
-    GCP_REGION: us-central1
+    GCP_REGION: us-east1
     PROJECT_ID: ctd-122381-3-sandbox
-    REPO_NAME: dcp-core-services-ref-poc
+    REPO_NAME: dcp-core-services-ref
     IMAGE_NAME: dcp-core-services-image-poc
     TAG_NAME: latest
     SERVICE_NAME: dcp-core-services-image-poc
@@ -149,4 +149,4 @@ jobs:
           --command "npm" \
           --args="start" \ 
           --port $PORT \
-          --image $GCP_REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$IMAGE_NAME:$TAG_NAME
+          --image $GCP_REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dcp-core-services-image:$TAG_NAME
