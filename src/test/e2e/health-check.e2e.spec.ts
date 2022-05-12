@@ -9,9 +9,9 @@ describe('[E2E] Testing Health Check', () => {
   beforeAll(() => {
     app = new App()
   })
-  describe('[GET] /api/health-check', () => {
+  describe('[GET] /health-check', () => {
     it('should be able to make a request and get a response with 200 status', async () => {
-      const response = await request(app.getServer()).get('/api/health-check')
+      const response = await request(app.getServer()).get('/health-check')
       expect(response.statusCode).toBe(StatusCodes.OK)
       expect(response._body).toStrictEqual({ status: 'ok' })
     })
