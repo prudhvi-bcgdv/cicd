@@ -141,12 +141,11 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy $SERVICE_NAME \
-          --platform managed \
-          --project $PROJECT_ID \
-          --region $GCP_REGION \
+          --image $GCP_REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dcp-core-services-image:$TAG_NAME \
           --allow-unauthenticated \
+          --region $GCP_REGION \
+          --port=$PORT \
+          --command=npm \
+          --args=start \
           --max-instances 1 \
-          --command "npm" \
-          --args="start" \ 
-          --port $PORT \
-          --image $GCP_REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dcp-core-services-image:$TAG_NAME
+          --project $PROJECT_ID
