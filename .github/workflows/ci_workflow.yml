@@ -22,7 +22,7 @@ on:
   #workflow_dispatch:
 
 env:
-    GCP_REGION: us-east1
+    GCP_REGION: us-central1
     PROJECT_ID: ctd-122381-3-sandbox
     REPO_NAME: dcp-core-services-ref
     IMAGE_NAME: dcp-core-services-image-poc
@@ -148,6 +148,6 @@ jobs:
           --allow-unauthenticated \
           --max-instances 1 \
           --command "npm" \
-          --args="--start" \ 
+          --args="start" \ 
           --port ${PORT} \
           --image ${GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:${TAG_NAME}
